@@ -2,7 +2,7 @@ const Cart = require("../models/Cart");
 const Product = require("../models/Product"); // Ensure you have access to the Product model
 
 // Add a product to the cart
-exports.addToCart = async (req, res) => {
+addToCart = async (req, res) => {
   const { userId, productId, quantity } = req.body;
 
   try {
@@ -58,7 +58,7 @@ exports.addToCart = async (req, res) => {
   }
 };
 // Get the cart contents for a user
-exports.getCart = async (req, res) => {
+getCart = async (req, res) => {
   const { userId } = req.params;
   try {
     const cart = await Cart.findOne({ userId }).populate(
@@ -75,7 +75,7 @@ exports.getCart = async (req, res) => {
   }
 };
 // Update the quantity of a product in the cart
-exports.updateQuantity = async (req, res) => {
+updateQuantity = async (req, res) => {
   const { userId, productId, quantity } = req.body;
   try {
     const cart = await Cart.findOne({ userId });
@@ -96,3 +96,10 @@ exports.updateQuantity = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+
+module.exports = {
+  getCart,
+  addToCart,
+  updateQuantity,
+}
